@@ -28,10 +28,7 @@ export default async function LoginPage() {
           <SignInButtons />
 
           <p className="mt-6 text-center text-xs text-gray-400">
-            By signing in, you agree to our{" "}
-            <a href="/terms" className="underline hover:text-gray-600">Terms of Service</a>
-            {" "}and{" "}
-            <a href="/privacy" className="underline hover:text-gray-600">Privacy Policy</a>.
+            By signing in, you agree to our Terms of Service and Privacy Policy.
           </p>
         </div>
       </div>

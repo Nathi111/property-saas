@@ -28,7 +28,9 @@ export default async function DashboardPage() {
 
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
           <p className="text-sm text-gray-500">Signed in as</p>
-          <p className="font-medium text-gray-900 mt-1">{session.user?.email}</p>
+          <p className="font-medium text-gray-900 mt-1">
+            {session.user?.email ?? "No email on file"}
+          </p>
         </div>
       </div>
     </main>

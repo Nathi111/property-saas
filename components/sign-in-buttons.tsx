@@ -5,17 +5,27 @@ import { signIn } from "next-auth/react"
 
 export default function SignInButtons() {
   const [loadingProvider, setLoadingProvider] = useState<"apple" | "google" | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   async function handleSignIn(provider: "apple" | "google") {
+    setError(null)
     setLoadingProvider(provider)
-    // callbackUrl takes the user to the dashboard after a successful login
-    await signIn(provider, { callbackUrl: "/dashboard" })
-    // setLoadingProvider(null) is intentionally omitted — the page will
-    // redirect away, so resetting state would cause a flash.
+    try {
+      await signIn(provider, { callbackUrl: "/dashboard" })
+      // Loading state intentionally left set — the page redirects away on success.
+    } catch {
+      setError("Something went wrong. Please try again.")
+      setLoadingProvider(null)
+    }
   }
 
   return (
     <div className="flex flex-col gap-3 w-full">
+      {error && (
+        <p role="alert" className="text-sm text-red-600 text-center">
+          {error}
+        </p>
+      )}
       <button
         onClick={() => handleSignIn("apple")}
         disabled={loadingProvider !== null}
